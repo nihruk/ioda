@@ -1,0 +1,26 @@
+{
+  "name": "@nihruk/ioda",
+  "description": "IODA",
+  "author": "National Institute for Health and Care Research",
+  "license": "MIT",
+  "version": "0.0.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nihruk/ioda.git"
+  },
+  "keywords": [
+    "nihr"
+  ],
+  "bugs": {
+    "url": "https://github.com/nihruk/ioda/issues"
+  },
+  "homepage": "https://github.com/nihruk/ioda#readme",
+  "scripts": {
+    "test-ioda-specification": "./node_modules/.bin/validate-api ./openapi/index.json",
+    "test": "npm run test-ioda-specification"
+  },
+  "devDependencies": {
+    "@seriousme/openapi-schema-validator": "^2.1.0"
+  }
+}
