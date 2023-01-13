@@ -258,6 +258,8 @@ components:
           minLength: 1
           maxLength: 255
           description: The center's human-readable name
+        address:
+          '$ref': '#/components/schemas/address'
       required:
         - id
         - name
@@ -310,6 +312,8 @@ components:
           minLength: 1
           maxLength: 255
           description: The institution's human-readable name
+        address:
+          '$ref': '#/components/schemas/address'
       required:
         - id
         - name
@@ -334,6 +338,14 @@ components:
               minLength: 1
               maxLength: 255
               description: The HTTP response status message.
+          required:
+            - status
+            - message
+          additionalProperties: false
+        required:
+          - message
+          - http
+        additionalProperties: false
     centerId:
       name: NIHR center ID
       type: string
@@ -363,6 +375,54 @@ components:
       name: ORCID
       type: string
       pattern: '^https:\/\/orcid.org\/\d{4}-\d{4}-\d{4}-\d{4}$'
+    coordinates:
+      type: object
+      properties:
+        latitude:
+          name: Latitude
+          type: number
+          description: A geographic coordinate in decimal degrees.
+        longitude:
+          name: Longitude
+          type: number
+          description: A geographic coordinate in decimal degrees.
+      required:
+        - latitude
+        - longitude
+      additionalProperties: false
+    postcode:
+      name: UK postcode
+      type: string
+      pattern: '^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$'
+    address:
+      name: Address
+      type: object
+      properties:
+        line1:
+          type: string
+          minLength: 1
+          maxLength: 255
+        line2:
+          type: string
+          minLength: 1
+          maxLength: 255
+        line3:
+          type: string
+          minLength: 1
+          maxLength: 255
+        town:
+          type: string
+          minLength: 1
+          maxLength: 255
+        postcode:
+          '$ref': '#/components/schemas/postcode'
+        coordinates:
+          '$ref': '#/components/schemas/coordinates'
+      required:
+        - line1
+        - town
+        - postcode
+      additionalProperties: false
   parameters:
     centerId:
       name: NIHR center ID
