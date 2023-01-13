@@ -283,6 +283,22 @@ components:
       properties:
         id:
           '$ref': '#/components/schemas/awardId'
+        start:
+          name: Start date
+          type: date
+        end:
+          name: End date
+          type: date
+        funding:
+          name: The total NIHR funding granted to the award
+          description: The granted funding in pence sterling.
+          type: integer
+          minimum: 1
+        website:
+          name: Website
+          description: The URL to the award's own website
+          type: string
+          format: uri
       required:
         - id
       additionalProperties: false
