@@ -6,7 +6,7 @@ This is the home of IODA.
 IODA is currently in its exploration phase. Some of the efforts contained in the repository are:
 
 ### OpenAPI specification
-The specification is kept in `./openapi/index.json`.
+The specification is kept in `./openapi/index.yaml`.
 
 ## View the API documentation
 Run `npm run docs`.

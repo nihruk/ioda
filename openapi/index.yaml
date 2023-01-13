@@ -1,0 +1,138 @@
+openapi: "3.1.0"
+info:
+  title: IODA
+  version: "0.0.0"
+servers:
+  - url: "https://example.com"
+    description: Live API
+paths:
+  "/center":
+    get:
+      description: Get a collection of NIHR centers.
+      responses:
+        '200':
+          description: A collection of NIHR centers
+          content:
+            application/json:
+              schema:
+                type: array
+  "/center/{id}":
+    get:
+      description: Get an NIHR center by its ID.
+      responses:
+        '200':
+          description: An NIHR center
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: An HTTP 404 Not Found error.
+          content:
+            application/json:
+              schema:
+                type: object
+  "/program":
+    get:
+      description: Get a collection of research programs.
+      responses:
+        '200':
+          description: A collection of research programs
+          content:
+            application/json:
+              schema:
+                type: array
+  "/program/{id}":
+    get:
+      description: Get a research program by its ID.
+      responses:
+        '200':
+          description: A research program
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: An HTTP 404 Not Found error.
+          content:
+            application/json:
+              schema:
+                type: object
+  "/award":
+    get:
+      description: Get a collection of awards.
+      responses:
+        '200':
+          description: A collection of awards
+          content:
+            application/json:
+              schema:
+                type: array
+  "/award/{id}":
+    get:
+      description: Get an award by its ID.
+      responses:
+        '200':
+          description: An award.
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: An HTTP 404 Not Found error.
+          content:
+            application/json:
+              schema:
+                type: object
+  "/person":
+    get:
+      description: Get a collection of people.
+      responses:
+        '200':
+          description: A collection of people
+          content:
+            application/json:
+              schema:
+                type: array
+  "/person/{id}":
+    get:
+      description: Get a person by their ID.
+      responses:
+        '200':
+          description: A person.
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: An HTTP 404 Not Found error.
+          content:
+            application/json:
+              schema:
+                type: object
+  "/institution":
+    get:
+      description: Get a collection of institutions.
+      responses:
+        '200':
+          description: A collection of institutions
+          content:
+            application/json:
+              schema:
+                type: array
+  "/institution/{id}":
+    get:
+      description: Get an institution by its ID.
+      responses:
+        '200':
+          description: An institution.
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: An HTTP 404 Not Found error.
+          content:
+            application/json:
+              schema:
+                type: object
