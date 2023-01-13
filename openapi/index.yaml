@@ -28,7 +28,7 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
-  "/center/{id}":
+  "/center/{centerId}":
     get:
       description: Get an NIHR center by its ID.
       responses:
@@ -52,6 +52,8 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
+    parameters:
+      - '$ref': '#/components/parameters/centerId'
   "/program":
     get:
       description: Get a collection of research programs.
@@ -74,7 +76,7 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
-  "/program/{id}":
+  "/program/{programId}":
     get:
       description: Get a research program by its ID.
       responses:
@@ -98,6 +100,8 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
+    parameters:
+      - '$ref': '#/components/parameters/programId'
   "/award":
     get:
       description: Get a collection of awards.
@@ -120,7 +124,7 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
-  "/award/{id}":
+  "/award/{awardId}":
     get:
       description: Get an award by its ID.
       responses:
@@ -144,6 +148,8 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
+    parameters:
+      - '$ref': '#/components/parameters/awardId'
   "/person":
     get:
       description: Get a collection of people.
@@ -166,7 +172,7 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
-  "/person/{id}":
+  "/person/{personId}":
     get:
       description: Get a person by their ID.
       responses:
@@ -190,6 +196,8 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
+    parameters:
+      - '$ref': '#/components/parameters/personId'
   "/institution":
     get:
       description: Get a collection of institutions.
@@ -212,7 +220,7 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
-  "/institution/{id}":
+  "/institution/{institutionId}":
     get:
       description: Get an institution by its ID.
       responses:
@@ -236,15 +244,19 @@ paths:
           '$ref': "#/components/responses/503ServiceUnavailable"
         '504':
           '$ref': "#/components/responses/504GatewayTimeout"
+    parameters:
+      - '$ref': '#/components/parameters/institutionId'
 components:
   schemas:
     center:
       type: object
       properties:
         id:
-          type: string
+          '$ref': '#/components/schemas/centerId'
         name:
           type: string
+          minLength: 1
+          maxLength: 255
           description: The center's human-readable name
       required:
         - id
@@ -254,9 +266,11 @@ components:
       type: object
       properties:
         id:
-          type: string
+          '$ref': '#/components/schemas/programId'
         name:
           type: string
+          minLength: 1
+          maxLength: 255
           description: The program's human-readable name
       required:
         - id
@@ -266,7 +280,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          '$ref': '#/components/schemas/awardId'
       required:
         - id
       additionalProperties: false
@@ -274,12 +288,14 @@ components:
       type: object
       properties:
         id:
-          type: string
+          '$ref': '#/components/schemas/personId'
         name:
           type: string
+          minLength: 1
+          maxLength: 255
           description: The person's name
         orcid:
-          type: string
+          '$ref': '#/components/schemas/orcid'
       required:
         - id
         - name
@@ -288,9 +304,11 @@ components:
       type: object
       properties:
         id:
-          type: string
+          '$ref': '#/components/schemas/institutionId'
         name:
           type: string
+          minLength: 1
+          maxLength: 255
           description: The institution's human-readable name
       required:
         - id
@@ -301,6 +319,8 @@ components:
       properties:
         message:
           type: string
+          minLength: 1
+          maxLength: 255
           description: The human-readable error message.
         http:
           type: object
@@ -311,7 +331,69 @@ components:
               description: The HTTP response status code.
             message:
               type: string
+              minLength: 1
+              maxLength: 255
               description: The HTTP response status message.
+    centerId:
+      name: NIHR center ID
+      type: string
+      minLength: 1
+      maxLength: 255
+    programId:
+      name: Research program ID
+      type: string
+      minLength: 1
+      maxLength: 255
+    awardId:
+      name: Award ID
+      type: string
+      minLength: 1
+      maxLength: 255
+    personId:
+      name: Person ID
+      type: string
+      minLength: 1
+      maxLength: 255
+    institutionId:
+      name: Research institution ID
+      type: string
+      minLength: 1
+      maxLength: 255
+    orcid:
+      name: ORCID
+      type: string
+      pattern: '^https:\/\/orcid.org\/\d{4}-\d{4}-\d{4}-\d{4}$'
+  parameters:
+    centerId:
+      name: NIHR center ID
+      in: path
+      required: true
+      schema:
+        '$ref': '#/components/schemas/centerId'
+    programId:
+      name: Research program ID
+      in: path
+      required: true
+      schema:
+        '$ref': '#/components/schemas/programId'
+    awardId:
+      name: Award ID
+      in: path
+      required: true
+      schema:
+        '$ref': '#/components/schemas/awardId'
+    personId:
+      name: Person ID
+      in: path
+      required: true
+      schema:
+        '$ref': '#/components/schemas/personId'
+    institutionId:
+      name: Research institution ID
+      in: path
+      required: true
+      schema:
+        '$ref': '#/components/schemas/institutionId'
   responses:
     200OKCenter:
       description: An NIHR center
