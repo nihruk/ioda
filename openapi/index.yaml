@@ -358,10 +358,10 @@ components:
             - status
             - message
           additionalProperties: false
-        required:
-          - message
-          - http
-        additionalProperties: false
+      required:
+        - message
+        - http
+      additionalProperties: false
     centerId:
       name: NIHR center ID
       type: string
