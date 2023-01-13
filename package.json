@@ -18,7 +18,7 @@
   "homepage": "https://github.com/nihruk/ioda#readme",
   "scripts": {
     "docs": "./node_modules/.bin/http-server -o -p 8081 ./openapi/",
-    "test-ioda-specification": "./node_modules/.bin/validate-api ./openapi/index.json",
+    "test-ioda-specification": "./node_modules/.bin/validate-api ./openapi/index.yaml",
     "test": "npm run test-ioda-specification"
   },
   "dependencies": {
