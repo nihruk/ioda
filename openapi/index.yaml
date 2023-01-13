@@ -11,128 +11,429 @@ paths:
       description: Get a collection of NIHR centers.
       responses:
         '200':
-          description: A collection of NIHR centers
-          content:
-            application/json:
-              schema:
-                type: array
+          '$ref': '#/components/responses/200OKCenterCollection'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/center/{id}":
     get:
       description: Get an NIHR center by its ID.
       responses:
         '200':
-          description: An NIHR center
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': '#/components/responses/200OKCenter'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
         '404':
-          description: An HTTP 404 Not Found error.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': "#/components/responses/404NotFound"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/program":
     get:
       description: Get a collection of research programs.
       responses:
         '200':
-          description: A collection of research programs
-          content:
-            application/json:
-              schema:
-                type: array
+          '$ref': '#/components/responses/200OKProgramCollection'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/program/{id}":
     get:
       description: Get a research program by its ID.
       responses:
         '200':
-          description: A research program
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': '#/components/responses/200OKProgram'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
         '404':
-          description: An HTTP 404 Not Found error.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': "#/components/responses/404NotFound"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/award":
     get:
       description: Get a collection of awards.
       responses:
         '200':
-          description: A collection of awards
-          content:
-            application/json:
-              schema:
-                type: array
+          '$ref': '#/components/responses/200OKAwardCollection'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/award/{id}":
     get:
       description: Get an award by its ID.
       responses:
         '200':
-          description: An award.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': '#/components/responses/200OKAward'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
         '404':
-          description: An HTTP 404 Not Found error.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': "#/components/responses/404NotFound"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/person":
     get:
       description: Get a collection of people.
       responses:
         '200':
-          description: A collection of people
-          content:
-            application/json:
-              schema:
-                type: array
+          '$ref': '#/components/responses/200OKPersonCollection'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/person/{id}":
     get:
       description: Get a person by their ID.
       responses:
         '200':
-          description: A person.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': '#/components/responses/200OKPerson'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
         '404':
-          description: An HTTP 404 Not Found error.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': "#/components/responses/404NotFound"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/institution":
     get:
       description: Get a collection of institutions.
       responses:
         '200':
-          description: A collection of institutions
-          content:
-            application/json:
-              schema:
-                type: array
+          '$ref': '#/components/responses/200OKInstitutionCollection'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
   "/institution/{id}":
     get:
       description: Get an institution by its ID.
       responses:
         '200':
-          description: An institution.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': '#/components/responses/200OKInstitution'
+        '400':
+          '$ref': "#/components/responses/400BadRequest"
         '404':
-          description: An HTTP 404 Not Found error.
-          content:
-            application/json:
-              schema:
-                type: object
+          '$ref': "#/components/responses/404NotFound"
+        '405':
+          '$ref': "#/components/responses/405MethodNotAllowed"
+        '406':
+          '$ref': "#/components/responses/406NotAcceptable"
+        '415':
+          '$ref': "#/components/responses/415UnsupportedMediaType"
+        '500':
+          '$ref': "#/components/responses/500InternalServerError"
+        '502':
+          '$ref': "#/components/responses/502BadGateway"
+        '503':
+          '$ref': "#/components/responses/503ServiceUnavailable"
+        '504':
+          '$ref': "#/components/responses/504GatewayTimeout"
+components:
+  schemas:
+    center:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The center's human-readable name
+      required:
+        - id
+        - name
+      additionalProperties: false
+    program:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The program's human-readable name
+      required:
+        - id
+        - name
+      additionalProperties: false
+    award:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+      additionalProperties: false
+    person:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The person's name
+        orcid:
+          type: string
+      required:
+        - id
+        - name
+      additionalProperties: false
+    institution:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: The institution's human-readable name
+      required:
+        - id
+        - name
+      additionalProperties: false
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The human-readable error message.
+        http:
+          type: object
+          properties:
+            status:
+              type: string
+              pattern: '^\d\d\d$'
+              description: The HTTP response status code.
+            message:
+              type: string
+              description: The HTTP response status message.
+  responses:
+    200OKCenter:
+      description: An NIHR center
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/center"
+    200OKCenterCollection:
+      description: A collection of NIHR centers
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              '$ref': "#/components/schemas/center"
+    200OKProgram:
+      description: A research program
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/program"
+    200OKProgramCollection:
+      description: A collection of research programs
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              '$ref': "#/components/schemas/program"
+    200OKAward:
+      description: An award
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/award"
+    200OKAwardCollection:
+      description: A collection of awards
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              '$ref': "#/components/schemas/award"
+    200OKPerson:
+      description: A person
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/person"
+    200OKPersonCollection:
+      description: A collection of people
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              '$ref': "#/components/schemas/person"
+    200OKInstitution:
+      description: A research institution
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/institution"
+    200OKInstitutionCollection:
+      description: A collection of research institutions
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              '$ref': "#/components/schemas/institution"
+    400BadRequest:
+      description: An HTTP 400 Bad Request error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    404NotFound:
+      description: An HTTP 404 Not Found error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    405MethodNotAllowed:
+      description: An HTTP 405 Method Not Allowed error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    406NotAcceptable:
+      description: An HTTP 406 Not Acceptable error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    415UnsupportedMediaType:
+      description: An HTTP 415 Unsupported Media Type error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    500InternalServerError:
+      description: An HTTP 500 Internal Server Error error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    502BadGateway:
+      description: An HTTP 502 Bad Gateway error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    503ServiceUnavailable:
+      description: An HTTP 503 Service Unavailable error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
+    504GatewayTimeout:
+      description: An HTTP 504 Gateway Timeout error.
+      content:
+        application/json:
+          schema:
+            '$ref': "#/components/schemas/error"
