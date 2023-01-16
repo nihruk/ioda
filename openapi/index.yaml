@@ -422,10 +422,14 @@ components:
           '$ref': '#/components/schemas/awardId'
         start:
           name: Start date
-          type: date
+          type: full-date
+          examples:
+            - 1970-01-01
         end:
           name: End date
-          type: date
+          type: full-date
+          examples:
+            - 2000-01-01
         funding:
           name: The total NIHR funding granted to the award
           description: The granted funding in pence sterling.
@@ -544,21 +548,29 @@ components:
       description: A UUIDv4
       type: string
       pattern: '[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}'
+      examples:
+        - 123e4567-e89b-12d3-a456-426614174000
       readonly: true
     orcid:
       name: ORCID
       type: string
       pattern: '^https:\/\/orcid.org\/\d{4}-\d{4}-\d{4}-\d{4}$'
+      examples:
+        - https://orcid.org/0000-0002-1825-0097
     coordinates:
       type: object
       properties:
         latitude:
           name: Latitude
           type: number
+          examples:
+            - 50.93457002193244
           description: A geographic coordinate in decimal degrees.
         longitude:
           name: Longitude
           type: number
+          examples:
+            - -1.3971751797681855
           description: A geographic coordinate in decimal degrees.
       required:
         - latitude
@@ -568,6 +580,8 @@ components:
       name: UK postcode
       type: string
       pattern: '^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$'
+      examples:
+        - SO17 1BJ
     address:
       name: Address
       type: object
@@ -576,10 +590,14 @@ components:
           type: string
           minLength: 1
           maxLength: 255
+          examples:
+            - University of Southampton
         line2:
           type: string
           minLength: 1
           maxLength: 255
+          examples:
+            - University Road
         line3:
           type: string
           minLength: 1
@@ -588,6 +606,8 @@ components:
           type: string
           minLength: 1
           maxLength: 255
+          examples:
+            - Southampton
         postcode:
           '$ref': '#/components/schemas/postcode'
         coordinates:
