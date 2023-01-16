@@ -278,6 +278,8 @@ paths:
       responses:
         '200':
           '$ref': '#/components/responses/200OKUser'
+        '204':
+          '$ref': '#/components/responses/204NoContent'
         '400':
           '$ref': '#/components/responses/400BadRequest'
         '401':
@@ -336,6 +338,8 @@ paths:
       responses:
         '200':
           '$ref': '#/components/responses/200OKUser'
+        '204':
+          '$ref': '#/components/responses/204NoContent'
         '400':
           '$ref': '#/components/responses/400BadRequest'
         '404':
@@ -359,8 +363,9 @@ paths:
     delete:
       description: Delete a IODA user by their ID.
       responses:
-        '200':
+        '204':
           description: The IODA user was successfully deleted.
+          '$ref': '#/components/responses/204NoContent'
         '400':
           '$ref': '#/components/responses/400BadRequest'
         '404':
@@ -719,6 +724,8 @@ components:
             type: array
             items:
               '$ref': '#/components/schemas/user'
+    204NoContent:
+      description: A successful response without any content.
     400BadRequest:
       description: An HTTP 400 Bad Request error.
       content:
