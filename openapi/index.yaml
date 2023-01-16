@@ -567,7 +567,7 @@ components:
     postcode:
       name: UK postcode
       type: string
-      pattern: '^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$'
+      pattern: '^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$'
     address:
       name: Address
       type: object
