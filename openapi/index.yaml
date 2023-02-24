@@ -116,6 +116,7 @@ paths:
       - '$ref': '#/components/parameters/programId'
   '/award':
     get:
+      operationId: getAwardCollection
       tags:
         - Award
       summary: Get a collection of awards
@@ -138,6 +139,23 @@ paths:
           '$ref': '#/components/responses/503ServiceUnavailable'
         '504':
           '$ref': '#/components/responses/504GatewayTimeout'
+    parameters:
+      - '$ref': '#/components/parameters/centerIdFilter'
+      - '$ref': '#/components/parameters/programIdFilter'
+      - '$ref': '#/components/parameters/institutionIdFilter'
+        name: contractor
+      - '$ref': '#/components/parameters/personIdFilter'
+        name: lead_applicants
+      - '$ref': '#/components/parameters/personIdFilter'
+        name: joint_lead_applicants
+      - '$ref': '#/components/parameters/personIdFilter'
+        name: lead_investigators
+      - '$ref': '#/components/parameters/personIdFilter'
+        name: chief_investigators
+      - '$ref': '#/components/parameters/personIdFilter'
+        name: co_investigators
+      - '$ref': '#/components/parameters/personIdFilter'
+        name: directors
   '/award/{awardId}':
     get:
       tags:
@@ -494,8 +512,41 @@ components:
           description: The URL to the award's own website
           type: string
           format: uri
+        center:
+          '$ref': '#/components/schemas/centerReference'
+        program:
+          '$ref': '#/components/schemas/programReference'
+        contractor:
+          '$ref': '#/components/schemas/institutionReference'
+        lead_applicants:
+          type: array
+          items:
+            '$ref': '#/components/schemas/personReference'
+        joint_lead_applicants:
+          type: array
+          items:
+            '$ref': '#/components/schemas/personReference'
+        lead_investigators:
+          type: array
+          items:
+            '$ref': '#/components/schemas/personReference'
+        chief_investigators:
+          type: array
+          items:
+            '$ref': '#/components/schemas/personReference'
+        co_investigators:
+          type: array
+          items:
+            '$ref': '#/components/schemas/personReference'
+        directors:
+          type: array
+          items:
+            '$ref': '#/components/schemas/personReference'
       required:
         - id
+        - center
+        - program
+        - institution
       additionalProperties: false
     person:
       type: object
@@ -575,29 +626,71 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    centerReference:
+      name: NIHR center reference
+      description: The relative URL of the endpoint to call to retrieve this center.
+      type: string
+      format: uri
+      examples:
+        - /center/123
     programId:
       name: Research program ID
       type: string
       minLength: 1
       maxLength: 255
+    programReference:
+      name: Research program reference
+      description: The relative URL of the endpoint to call to retrieve this program.
+      type: string
+      format: uri
+      examples:
+        - /program/123
     awardId:
       name: Award ID
       type: string
       minLength: 1
       maxLength: 255
+    awardReference:
+      name: Award reference
+      description: The relative URL of the endpoint to call to retrieve this award.
+      type: string
+      format: uri
+      examples:
+        - /award/123
     personId:
       name: Person ID
       type: string
       minLength: 1
       maxLength: 255
+    personReference:
+      name: Person reference
+      description: The relative URL of the endpoint to call to retrieve this person.
+      type: string
+      format: uri
+      examples:
+        - /person/123
     institutionId:
       name: Research institution ID
       type: string
       minLength: 1
       maxLength: 255
+    institutionReference:
+      name: Institution reference
+      description: The relative URL of the endpoint to call to retrieve this institution.
+      type: string
+      format: uri
+      examples:
+        - /institution/123
     userId:
       name: IODA user ID
       '$ref': '#/components/schemas/uuidV4'
+    userReference:
+      name: User reference
+      description: The relative URL of the endpoint to call to retrieve this user.
+      type: string
+      format: uri
+      examples:
+        - /user/123e4567-e89b-12d3-a456-426614174000
     uuidV4:
       description: A UUIDv4
       type: string
@@ -679,11 +772,23 @@ components:
       required: true
       schema:
         '$ref': '#/components/schemas/centerId'
+    centerIdFilter:
+      name: center
+      description: NIHR center ID
+      in: query
+      schema:
+        '$ref': '#/components/schemas/centerId'
     programId:
       name: programId
       description: Research program ID
       in: path
       required: true
+      schema:
+        '$ref': '#/components/schemas/programId'
+    programIdFilter:
+      name: program
+      description: Research program ID
+      in: query
       schema:
         '$ref': '#/components/schemas/programId'
     awardId:
@@ -700,11 +805,23 @@ components:
       required: true
       schema:
         '$ref': '#/components/schemas/personId'
+    personIdFilter:
+      name: person
+      description: Person ID
+      in: query
+      schema:
+        '$ref': '#/components/schemas/personId'
     institutionId:
       name: institutionId
       description: Research institution ID
       in: path
       required: true
+      schema:
+        '$ref': '#/components/schemas/institutionId'
+    institutionIdFilter:
+      name: institution
+      description: Institution ID
+      in: query
       schema:
         '$ref': '#/components/schemas/institutionId'
     userId:
@@ -721,6 +838,11 @@ components:
         application/json:
           schema:
             '$ref': '#/components/schemas/center'
+      links:
+        awards:
+          operationId: getAwardCollection
+          parameters:
+            center: '$response.body#/id'
     200OKCenterCollection:
       description: A collection of NIHR centers
       content:
@@ -728,13 +850,18 @@ components:
           schema:
             type: array
             items:
-              '$ref': '#/components/schemas/center'
+              '$ref': '#/components/schemas/centerReference'
     200OKProgram:
       description: A research program
       content:
         application/json:
           schema:
             '$ref': '#/components/schemas/program'
+      links:
+        awards:
+          operationId: getAwardCollection
+          parameters:
+            program: '$response.body#/id'
     200OKProgramCollection:
       description: A collection of research programs
       content:
@@ -742,7 +869,7 @@ components:
           schema:
             type: array
             items:
-              '$ref': '#/components/schemas/program'
+              '$ref': '#/components/schemas/programReference'
     200OKAward:
       description: An award
       content:
@@ -756,13 +883,44 @@ components:
           schema:
             type: array
             items:
-              '$ref': '#/components/schemas/award'
+              '$ref': '#/components/schemas/awardReference'
     200OKPerson:
       description: A person
       content:
         application/json:
           schema:
             '$ref': '#/components/schemas/person'
+      links:
+        lead_applicant_awards:
+          operationId: getAwardCollection
+          description: Get all awards for which this person is a lead applicant
+          parameters:
+            lead_applicants: '$response.body#/id'
+        joint_lead_applicant_awards:
+          operationId: getAwardCollection
+          description: Get all awards for which this person is a joint lead applicant
+          parameters:
+            joint_lead_applicants: '$response.body#/id'
+        lead_investigator_awards:
+          operationId: getAwardCollection
+          description: Get all awards for which this person is a lead investigator
+          parameters:
+            lead_investigators: '$response.body#/id'
+        chief_investigator_awards:
+          operationId: getAwardCollection
+          description: Get all awards for which this person is a chief investigator
+          parameters:
+            chief_investigators: '$response.body#/id'
+        co_investigator_awards:
+          operationId: getAwardCollection
+          description: Get all awards for which this person is a co-investigator
+          parameters:
+            co_investigator: '$response.body#/id'
+        director_awards:
+          operationId: getAwardCollection
+          description: Get all awards for which this person is a director
+          parameters:
+            directors: '$response.body#/id'
     200OKPersonCollection:
       description: A collection of people
       content:
@@ -770,13 +928,18 @@ components:
           schema:
             type: array
             items:
-              '$ref': '#/components/schemas/person'
+              '$ref': '#/components/schemas/personReference'
     200OKInstitution:
       description: A research institution
       content:
         application/json:
           schema:
             '$ref': '#/components/schemas/institution'
+      links:
+        awards:
+          operationId: getAwardCollection
+          parameters:
+            institution: '$response.body#/id'
     200OKInstitutionCollection:
       description: A collection of research institutions
       content:
@@ -784,7 +947,7 @@ components:
           schema:
             type: array
             items:
-              '$ref': '#/components/schemas/institution'
+              '$ref': '#/components/schemas/institutionReference'
     200OKUser:
       description: A IODA user
       content:
@@ -798,7 +961,7 @@ components:
           schema:
             type: array
             items:
-              '$ref': '#/components/schemas/user'
+              '$ref': '#/components/schemas/userReference'
     400BadRequest:
       description: An HTTP 400 Bad Request error.
       content:
