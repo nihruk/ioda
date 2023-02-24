@@ -2,6 +2,10 @@ openapi: '3.1.0'
 info:
   title: IODA
   version: '0.0.0'
+  x-logo:
+    url: https://www.nihr.ac.uk/layout/4.0/assets/logos/nihr-master-logo-325px.png
+    href: https://nihr.ac.uk
+    backgroundColor: '#ffffff'
 servers:
   - url: 'https://example.com'
     description: Live API
