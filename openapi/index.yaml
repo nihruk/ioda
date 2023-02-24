@@ -8,6 +8,8 @@ servers:
 paths:
   '/center':
     get:
+      tags:
+        - Center
       description: Get a collection of NIHR centers.
       responses:
         '200':
@@ -30,6 +32,8 @@ paths:
           '$ref': '#/components/responses/504GatewayTimeout'
   '/center/{centerId}':
     get:
+      tags:
+        - Center
       description: Get an NIHR center by its ID.
       responses:
         '200':
@@ -56,6 +60,8 @@ paths:
       - '$ref': '#/components/parameters/centerId'
   '/program':
     get:
+      tags:
+        - Research program
       description: Get a collection of research programs.
       responses:
         '200':
@@ -78,6 +84,8 @@ paths:
           '$ref': '#/components/responses/504GatewayTimeout'
   '/program/{programId}':
     get:
+      tags:
+        - Research program
       description: Get a research program by its ID.
       responses:
         '200':
@@ -104,6 +112,8 @@ paths:
       - '$ref': '#/components/parameters/programId'
   '/award':
     get:
+      tags:
+        - Award
       description: Get a collection of awards.
       responses:
         '200':
@@ -126,6 +136,8 @@ paths:
           '$ref': '#/components/responses/504GatewayTimeout'
   '/award/{awardId}':
     get:
+      tags:
+        - Award
       description: Get an award by its ID.
       responses:
         '200':
@@ -152,6 +164,8 @@ paths:
       - '$ref': '#/components/parameters/awardId'
   '/person':
     get:
+      tags:
+        - Person
       description: Get a collection of people.
       responses:
         '200':
@@ -174,6 +188,8 @@ paths:
           '$ref': '#/components/responses/504GatewayTimeout'
   '/person/{personId}':
     get:
+      tags:
+        - Person
       description: Get a person by their ID.
       responses:
         '200':
@@ -200,6 +216,8 @@ paths:
       - '$ref': '#/components/parameters/personId'
   '/institution':
     get:
+      tags:
+        - Institution
       description: Get a collection of institutions.
       responses:
         '200':
@@ -222,6 +240,8 @@ paths:
           '$ref': '#/components/responses/504GatewayTimeout'
   '/institution/{institutionId}':
     get:
+      tags:
+        - Institution
       description: Get an institution by its ID.
       responses:
         '200':
@@ -248,6 +268,8 @@ paths:
       - '$ref': '#/components/parameters/institutionId'
   '/user':
     get:
+      tags:
+        - User
       description: Get a collection of IODA users.
       responses:
         '200':
@@ -275,6 +297,8 @@ paths:
       security:
         - ioda: []
     post:
+      tags:
+        - User
       description: Save a new IODA user.
       requestBody:
         content:
@@ -310,6 +334,8 @@ paths:
         - ioda: []
   '/user/{userId}':
     get:
+      tags:
+        - User
       description: Get a IODA user by their ID.
       responses:
         '200':
@@ -339,6 +365,8 @@ paths:
       security:
         - ioda: []
     patch:
+      tags:
+        - User
       description: Update a IODA user by their ID.
       requestBody:
         content:
@@ -373,6 +401,8 @@ paths:
       security:
         - ioda: []
     delete:
+      tags:
+        - User
       description: Delete a IODA user by their ID.
       responses:
         '200':
