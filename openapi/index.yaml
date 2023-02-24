@@ -10,7 +10,7 @@ paths:
     get:
       tags:
         - Center
-      description: Get a collection of NIHR centers.
+      summary: Get a collection of NIHR centers
       responses:
         '200':
           '$ref': '#/components/responses/200OKCenterCollection'
@@ -34,7 +34,7 @@ paths:
     get:
       tags:
         - Center
-      description: Get an NIHR center by its ID.
+      summary: Get an NIHR center
       responses:
         '200':
           '$ref': '#/components/responses/200OKCenter'
@@ -62,7 +62,7 @@ paths:
     get:
       tags:
         - Research program
-      description: Get a collection of research programs.
+      summary: Get a collection of research programs
       responses:
         '200':
           '$ref': '#/components/responses/200OKProgramCollection'
@@ -86,7 +86,7 @@ paths:
     get:
       tags:
         - Research program
-      description: Get a research program by its ID.
+      summary: Get a research program
       responses:
         '200':
           '$ref': '#/components/responses/200OKProgram'
@@ -114,7 +114,7 @@ paths:
     get:
       tags:
         - Award
-      description: Get a collection of awards.
+      summary: Get a collection of awards
       responses:
         '200':
           '$ref': '#/components/responses/200OKAwardCollection'
@@ -138,7 +138,7 @@ paths:
     get:
       tags:
         - Award
-      description: Get an award by its ID.
+      summary: Get an award
       responses:
         '200':
           '$ref': '#/components/responses/200OKAward'
@@ -166,7 +166,7 @@ paths:
     get:
       tags:
         - Person
-      description: Get a collection of people.
+      summary: Get a collection of people
       responses:
         '200':
           '$ref': '#/components/responses/200OKPersonCollection'
@@ -190,7 +190,7 @@ paths:
     get:
       tags:
         - Person
-      description: Get a person by their ID.
+      summary: Get a person
       responses:
         '200':
           '$ref': '#/components/responses/200OKPerson'
@@ -218,7 +218,7 @@ paths:
     get:
       tags:
         - Institution
-      description: Get a collection of institutions.
+      summary: Get a collection of institutions
       responses:
         '200':
           '$ref': '#/components/responses/200OKInstitutionCollection'
@@ -242,7 +242,7 @@ paths:
     get:
       tags:
         - Institution
-      description: Get an institution by its ID.
+      summary: Get an institution
       responses:
         '200':
           '$ref': '#/components/responses/200OKInstitution'
@@ -270,7 +270,7 @@ paths:
     get:
       tags:
         - User
-      description: Get a collection of IODA users.
+      summary: Get a collection of users
       responses:
         '200':
           '$ref': '#/components/responses/200OKUserCollection'
@@ -299,7 +299,7 @@ paths:
     post:
       tags:
         - User
-      description: Save a new IODA user.
+      summary: Save a new user
       requestBody:
         content:
           application/json:
@@ -336,7 +336,7 @@ paths:
     get:
       tags:
         - User
-      description: Get a IODA user by their ID.
+      summary: Get a user
       responses:
         '200':
           '$ref': '#/components/responses/200OKUser'
@@ -367,7 +367,7 @@ paths:
     patch:
       tags:
         - User
-      description: Update a IODA user by their ID.
+      summary: Update a user
       requestBody:
         content:
           application/json-patch+json:
@@ -403,7 +403,7 @@ paths:
     delete:
       tags:
         - User
-      description: Delete a IODA user by their ID.
+      summary: Delete a user
       responses:
         '200':
           description: The IODA user was successfully deleted.
