@@ -669,37 +669,43 @@ components:
       additionalProperties: false
   parameters:
     centerId:
-      name: NIHR center ID
+      name: centerId
+      description: NIHR center ID
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/centerId'
     programId:
-      name: Research program ID
+      name: programId
+      description: Research program ID
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/programId'
     awardId:
-      name: Award ID
+      name: awardId
+      description: Award ID
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/awardId'
     personId:
-      name: Person ID
+      name: personId
+      description: Person ID
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/personId'
     institutionId:
-      name: Research institution ID
+      name: institutionId
+      description: Research institution ID
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/institutionId'
     userId:
-      name: IODA user ID
+      name: userId
+      description: IODA user ID
       in: path
       required: true
       schema:
