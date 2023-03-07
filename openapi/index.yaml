@@ -10,58 +10,6 @@ servers:
   - url: 'https://example.com'
     description: Live API.
 paths:
-  '/center':
-    get:
-      tags:
-        - Center
-      summary: Get a collection of NIHR centers
-      responses:
-        '200':
-          '$ref': '#/components/responses/200OKCenterCollection'
-        '400':
-          '$ref': '#/components/responses/400BadRequest'
-        '405':
-          '$ref': '#/components/responses/405MethodNotAllowed'
-        '406':
-          '$ref': '#/components/responses/406NotAcceptable'
-        '415':
-          '$ref': '#/components/responses/415UnsupportedMediaType'
-        '500':
-          '$ref': '#/components/responses/500InternalServerError'
-        '502':
-          '$ref': '#/components/responses/502BadGateway'
-        '503':
-          '$ref': '#/components/responses/503ServiceUnavailable'
-        '504':
-          '$ref': '#/components/responses/504GatewayTimeout'
-  '/center/{centerId}':
-    get:
-      tags:
-        - Center
-      summary: Get an NIHR center
-      responses:
-        '200':
-          '$ref': '#/components/responses/200OKCenter'
-        '400':
-          '$ref': '#/components/responses/400BadRequest'
-        '404':
-          '$ref': '#/components/responses/404NotFound'
-        '405':
-          '$ref': '#/components/responses/405MethodNotAllowed'
-        '406':
-          '$ref': '#/components/responses/406NotAcceptable'
-        '415':
-          '$ref': '#/components/responses/415UnsupportedMediaType'
-        '500':
-          '$ref': '#/components/responses/500InternalServerError'
-        '502':
-          '$ref': '#/components/responses/502BadGateway'
-        '503':
-          '$ref': '#/components/responses/503ServiceUnavailable'
-        '504':
-          '$ref': '#/components/responses/504GatewayTimeout'
-    parameters:
-      - '$ref': '#/components/parameters/centerId'
   '/program':
     get:
       tags:
@@ -140,9 +88,10 @@ paths:
         '504':
           '$ref': '#/components/responses/504GatewayTimeout'
     parameters:
-      - '$ref': '#/components/parameters/centerIdFilter'
+      - '$ref': '#/components/parameters/organizationIdFilter'
+        name: host
       - '$ref': '#/components/parameters/programIdFilter'
-      - '$ref': '#/components/parameters/institutionIdFilter'
+      - '$ref': '#/components/parameters/organizationIdFilter'
         name: contractor
       - '$ref': '#/components/parameters/personIdFilter'
         name: lead_applicants
@@ -236,14 +185,14 @@ paths:
           '$ref': '#/components/responses/504GatewayTimeout'
     parameters:
       - '$ref': '#/components/parameters/personId'
-  '/institution':
+  '/organization':
     get:
       tags:
-        - Institution
-      summary: Get a collection of institutions
+        - Organization
+      summary: Get a collection of organizations.
       responses:
         '200':
-          '$ref': '#/components/responses/200OKInstitutionCollection'
+          '$ref': '#/components/responses/200OKOrganizationCollection'
         '400':
           '$ref': '#/components/responses/400BadRequest'
         '405':
@@ -260,14 +209,14 @@ paths:
           '$ref': '#/components/responses/503ServiceUnavailable'
         '504':
           '$ref': '#/components/responses/504GatewayTimeout'
-  '/institution/{institutionId}':
+  '/organization/{organizationId}':
     get:
       tags:
-        - Institution
-      summary: Get an institution
+        - Organization
+      summary: Get an organization
       responses:
         '200':
-          '$ref': '#/components/responses/200OKInstitution'
+          '$ref': '#/components/responses/200OKOrganization'
         '400':
           '$ref': '#/components/responses/400BadRequest'
         '404':
@@ -287,7 +236,7 @@ paths:
         '504':
           '$ref': '#/components/responses/504GatewayTimeout'
     parameters:
-      - '$ref': '#/components/parameters/institutionId'
+      - '$ref': '#/components/parameters/organizationId'
   '/user':
     get:
       tags:
@@ -457,16 +406,18 @@ paths:
       - '$ref': '#/components/parameters/userId'
 components:
   schemas:
-    center:
+    organization:
       type: object
       properties:
         id:
-          '$ref': '#/components/schemas/centerId'
+          '$ref': '#/components/schemas/organizationId'
         name:
           type: string
           minLength: 1
           maxLength: 255
-          description: The center's human-readable name.
+          description: The organization's human-readable name.
+          examples:
+            - University of Southampton
         address:
           '$ref': '#/components/schemas/address'
       required:
@@ -518,12 +469,12 @@ components:
           description: The absolute URL to the award's own website.
           type: string
           format: uri
-        center:
-          '$ref': '#/components/schemas/centerReference'
+        host:
+          '$ref': '#/components/schemas/organizationReference'
         program:
           '$ref': '#/components/schemas/programReference'
         contractor:
-          '$ref': '#/components/schemas/institutionReference'
+          '$ref': '#/components/schemas/organizationReference'
         lead_applicants:
           type: array
           items:
@@ -554,9 +505,9 @@ components:
           '$ref': '#/components/schemas/prospero'
       required:
         - id
-        - center
+        - host
         - program
-        - institution
+        - contractor
       additionalProperties: false
     person:
       type: object
@@ -572,24 +523,6 @@ components:
             - Josiah Carberry
         orcid:
           '$ref': '#/components/schemas/orcid'
-      required:
-        - id
-        - name
-      additionalProperties: false
-    institution:
-      type: object
-      properties:
-        id:
-          '$ref': '#/components/schemas/institutionId'
-        name:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: The institution's human-readable name.
-          examples:
-            - University of Southampton
-        address:
-          '$ref': '#/components/schemas/address'
       required:
         - id
         - name
@@ -635,19 +568,6 @@ components:
         - message
         - http
       additionalProperties: false
-    centerId:
-      title: Center ID
-      description: An NIHR center ID.
-      type: string
-      minLength: 1
-      maxLength: 255
-    centerReference:
-      title: NIHR center reference
-      description: The relative URL of the endpoint to call to retrieve this NIHR center.
-      type: string
-      format: uri
-      examples:
-        - /center/123
     programId:
       title: Program ID
       description: A research program ID.
@@ -690,19 +610,19 @@ components:
       format: uri
       examples:
         - /person/123
-    institutionId:
-      title: Institution ID
-      description: An institution ID.
+    organizationId:
+      title: Organization ID
+      description: An organization ID.
       type: string
       minLength: 1
       maxLength: 255
-    institutionReference:
-      title: Institution reference
-      description: The relative URL of the endpoint to call to retrieve this institution.
+    organizationReference:
+      title: Organization reference
+      description: The relative URL of the endpoint to call to retrieve this organization.
       type: string
       format: uri
       examples:
-        - /institution/123
+        - /organization/123
     userId:
       title: User ID
       '$ref': '#/components/schemas/uuidV4'
@@ -824,19 +744,6 @@ components:
         - postcode
       additionalProperties: false
   parameters:
-    centerId:
-      name: centerId
-      description: NIHR center ID.
-      in: path
-      required: true
-      schema:
-        '$ref': '#/components/schemas/centerId'
-    centerIdFilter:
-      name: center
-      description: NIHR center ID.
-      in: query
-      schema:
-        '$ref': '#/components/schemas/centerId'
     programId:
       name: programId
       description: Research program ID.
@@ -870,19 +777,19 @@ components:
       in: query
       schema:
         '$ref': '#/components/schemas/personId'
-    institutionId:
-      name: institutionId
-      description: Research institution ID.
+    organizationId:
+      name: organizationId
+      description: Organization ID.
       in: path
       required: true
       schema:
-        '$ref': '#/components/schemas/institutionId'
-    institutionIdFilter:
-      name: institution
-      description: Institution ID.
+        '$ref': '#/components/schemas/organizationId'
+    organizationIdFilter:
+      name: organization
+      description: Organization ID.
       in: query
       schema:
-        '$ref': '#/components/schemas/institutionId'
+        '$ref': '#/components/schemas/organizationId'
     userId:
       name: userId
       description: User ID.
@@ -891,25 +798,6 @@ components:
       schema:
         '$ref': '#/components/schemas/userId'
   responses:
-    200OKCenter:
-      description: An NIHR center.
-      content:
-        application/json:
-          schema:
-            '$ref': '#/components/schemas/center'
-      links:
-        awards:
-          operationId: getAwardCollection
-          parameters:
-            center: '$response.body#/id'
-    200OKCenterCollection:
-      description: A collection of NIHR centers.
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              '$ref': '#/components/schemas/centerReference'
     200OKProgram:
       description: A research program.
       content:
@@ -988,25 +876,29 @@ components:
             type: array
             items:
               '$ref': '#/components/schemas/personReference'
-    200OKInstitution:
-      description: A research institution.
+    200OKOrganization:
+      description: An organization.
       content:
         application/json:
           schema:
-            '$ref': '#/components/schemas/institution'
+            '$ref': '#/components/schemas/organization'
       links:
-        awards:
+        contractedAwards:
           operationId: getAwardCollection
           parameters:
-            institution: '$response.body#/id'
-    200OKInstitutionCollection:
-      description: A collection of research institutions.
+            contractor: '$response.body#/id'
+        hostedAwards:
+          operationId: getAwardCollection
+          parameters:
+            host: '$response.body#/id'
+    200OKOrganizationCollection:
+      description: A collection of organizations.
       content:
         application/json:
           schema:
             type: array
             items:
-              '$ref': '#/components/schemas/institutionReference'
+              '$ref': '#/components/schemas/organizationReference'
     200OKUser:
       description: A user.
       content:
