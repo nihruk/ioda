@@ -8,7 +8,7 @@ info:
     backgroundColor: '#ffffff'
 servers:
   - url: 'https://example.com'
-    description: Live API
+    description: Live API.
 paths:
   '/center':
     get:
@@ -428,7 +428,7 @@ paths:
       summary: Delete a user
       responses:
         '200':
-          description: The IODA user was successfully deleted.
+          description: The user was successfully deleted.
         '400':
           '$ref': '#/components/responses/400BadRequest'
         '401':
@@ -466,7 +466,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-          description: The center's human-readable name
+          description: The center's human-readable name.
         address:
           '$ref': '#/components/schemas/address'
       required:
@@ -482,34 +482,40 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-          description: The program's human-readable name
+          description: The program's human-readable name.
       required:
         - id
         - name
       additionalProperties: false
     award:
       type: object
+      title: Award
+      description: A research award.
       properties:
         id:
           '$ref': '#/components/schemas/awardId'
         start:
-          name: Start date
+          title: Start date
+          description: The date the research started.
           type: full-date
           examples:
             - 1970-01-01
         end:
-          name: End date
+          title: End date
+          description: The date the research ended.
           type: full-date
           examples:
             - 2000-01-01
         funding:
-          name: The total NIHR funding granted to the award
-          description: The granted funding in pence sterling.
+          title: The total NIHR funding granted to the award
+          description: 'The granted funding in pence sterling. Example: `254566100` representing £2,545,661.00.'
           type: integer
           minimum: 1
+          examples:
+            - 254566100
         website:
-          name: Website
-          description: The URL to the award's own website
+          title: Website
+          description: The absolute URL to the award's own website.
           type: string
           format: uri
         center:
@@ -557,7 +563,9 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-          description: The person's name
+          description: The person's name.
+          examples:
+            - Josiah Carberry
         orcid:
           '$ref': '#/components/schemas/orcid'
       required:
@@ -573,7 +581,9 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-          description: The institution's human-readable name
+          description: The institution's human-readable name.
+          examples:
+            - University of Southampton
         address:
           '$ref': '#/components/schemas/address'
       required:
@@ -588,7 +598,7 @@ components:
         emailAddress:
           type: string
           format: email
-          description: The user's email address for communication
+          description: The user's email address.
       required:
         - id
         - emailAddress
@@ -622,99 +632,117 @@ components:
         - http
       additionalProperties: false
     centerId:
-      name: NIHR center ID
+      title: Center ID
+      description: An NIHR center ID.
       type: string
       minLength: 1
       maxLength: 255
     centerReference:
-      name: NIHR center reference
-      description: The relative URL of the endpoint to call to retrieve this center.
+      title: NIHR center reference
+      description: The relative URL of the endpoint to call to retrieve this NIHR center.
       type: string
       format: uri
       examples:
         - /center/123
     programId:
-      name: Research program ID
+      title: Program ID
+      description: A research program ID.
       type: string
       minLength: 1
       maxLength: 255
     programReference:
-      name: Research program reference
-      description: The relative URL of the endpoint to call to retrieve this program.
+      title: Program reference
+      description: The relative URL of the endpoint to call to retrieve this research program.
       type: string
       format: uri
       examples:
         - /program/123
     awardId:
-      name: Award ID
+      title: Award ID
+      description: An award ID.
       type: string
       minLength: 1
       maxLength: 255
+      examples:
+        - 06/303/20
+        - NIHR203571
     awardReference:
-      name: Award reference
+      title: Award reference
       description: The relative URL of the endpoint to call to retrieve this award.
       type: string
       format: uri
       examples:
-        - /award/123
+        - /award/06/303/20
     personId:
-      name: Person ID
+      title: Person ID
+      description: A person ID.
       type: string
       minLength: 1
       maxLength: 255
     personReference:
-      name: Person reference
+      title: Person reference
       description: The relative URL of the endpoint to call to retrieve this person.
       type: string
       format: uri
       examples:
         - /person/123
     institutionId:
-      name: Research institution ID
+      title: Institution ID
+      description: An institution ID.
       type: string
       minLength: 1
       maxLength: 255
     institutionReference:
-      name: Institution reference
+      title: Institution reference
       description: The relative URL of the endpoint to call to retrieve this institution.
       type: string
       format: uri
       examples:
         - /institution/123
     userId:
-      name: IODA user ID
+      title: User ID
       '$ref': '#/components/schemas/uuidV4'
     userReference:
-      name: User reference
+      title: User reference
       description: The relative URL of the endpoint to call to retrieve this user.
       type: string
       format: uri
       examples:
         - /user/123e4567-e89b-12d3-a456-426614174000
     uuidV4:
-      description: A UUIDv4
+      title: UUID v4
+      description: A UUID version 4.
+      externalDocs:
+        url: https://datatracker.ietf.org/doc/html/rfc4122
+        description: RFC 4122.
       type: string
       pattern: '[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}'
       examples:
         - 123e4567-e89b-12d3-a456-426614174000
       readonly: true
     orcid:
-      name: ORCID
+      title: ORCID
+      description: Open Researcher and Contributor ID.
+      externalDocs:
+        url: https://orcid.org/
+        title: Official ORCID site
       type: string
       pattern: '^https:\/\/orcid.org\/\d{4}-\d{4}-\d{4}-\d{4}$'
       examples:
         - https://orcid.org/0000-0002-1825-0097
     coordinates:
       type: object
+      title: Coordinates
+      description: Geographic coordinates.
       properties:
         latitude:
-          name: Latitude
+          title: Latitude
           type: number
           examples:
             - 50.93457002193244
           description: A geographic coordinate in decimal degrees.
         longitude:
-          name: Longitude
+          title: Longitude
           type: number
           examples:
             - -1.3971751797681855
@@ -724,32 +752,38 @@ components:
         - longitude
       additionalProperties: false
     postcode:
-      name: UK postcode
+      title: Postcode
+      description: A UK postcode.
       type: string
       pattern: '^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$'
       examples:
         - SO17 1BJ
     address:
-      name: Address
+      title: Address
+      description: A UK address.
       type: object
       properties:
         line1:
+          title: Line 1
           type: string
           minLength: 1
           maxLength: 255
           examples:
             - University of Southampton
         line2:
+          title: Line 2
           type: string
           minLength: 1
           maxLength: 255
           examples:
             - University Road
         line3:
+          title: Line 3
           type: string
           minLength: 1
           maxLength: 255
         town:
+          title: Town
           type: string
           minLength: 1
           maxLength: 255
@@ -767,73 +801,73 @@ components:
   parameters:
     centerId:
       name: centerId
-      description: NIHR center ID
+      description: NIHR center ID.
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/centerId'
     centerIdFilter:
       name: center
-      description: NIHR center ID
+      description: NIHR center ID.
       in: query
       schema:
         '$ref': '#/components/schemas/centerId'
     programId:
       name: programId
-      description: Research program ID
+      description: Research program ID.
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/programId'
     programIdFilter:
       name: program
-      description: Research program ID
+      description: Research program ID.
       in: query
       schema:
         '$ref': '#/components/schemas/programId'
     awardId:
       name: awardId
-      description: Award ID
+      description: Award ID.
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/awardId'
     personId:
       name: personId
-      description: Person ID
+      description: Person ID.
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/personId'
     personIdFilter:
       name: person
-      description: Person ID
+      description: Person ID.
       in: query
       schema:
         '$ref': '#/components/schemas/personId'
     institutionId:
       name: institutionId
-      description: Research institution ID
+      description: Research institution ID.
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/institutionId'
     institutionIdFilter:
       name: institution
-      description: Institution ID
+      description: Institution ID.
       in: query
       schema:
         '$ref': '#/components/schemas/institutionId'
     userId:
       name: userId
-      description: IODA user ID
+      description: User ID.
       in: path
       required: true
       schema:
         '$ref': '#/components/schemas/userId'
   responses:
     200OKCenter:
-      description: An NIHR center
+      description: An NIHR center.
       content:
         application/json:
           schema:
@@ -844,7 +878,7 @@ components:
           parameters:
             center: '$response.body#/id'
     200OKCenterCollection:
-      description: A collection of NIHR centers
+      description: A collection of NIHR centers.
       content:
         application/json:
           schema:
@@ -852,7 +886,7 @@ components:
             items:
               '$ref': '#/components/schemas/centerReference'
     200OKProgram:
-      description: A research program
+      description: A research program.
       content:
         application/json:
           schema:
@@ -863,7 +897,7 @@ components:
           parameters:
             program: '$response.body#/id'
     200OKProgramCollection:
-      description: A collection of research programs
+      description: A collection of research programs.
       content:
         application/json:
           schema:
@@ -871,13 +905,13 @@ components:
             items:
               '$ref': '#/components/schemas/programReference'
     200OKAward:
-      description: An award
+      description: An award.
       content:
         application/json:
           schema:
             '$ref': '#/components/schemas/award'
     200OKAwardCollection:
-      description: A collection of awards
+      description: A collection of awards.
       content:
         application/json:
           schema:
@@ -885,7 +919,7 @@ components:
             items:
               '$ref': '#/components/schemas/awardReference'
     200OKPerson:
-      description: A person
+      description: A person.
       content:
         application/json:
           schema:
@@ -893,36 +927,36 @@ components:
       links:
         lead_applicant_awards:
           operationId: getAwardCollection
-          description: Get all awards for which this person is a lead applicant
+          description: Get all awards for which this person is a lead applicant.
           parameters:
             lead_applicants: '$response.body#/id'
         joint_lead_applicant_awards:
           operationId: getAwardCollection
-          description: Get all awards for which this person is a joint lead applicant
+          description: Get all awards for which this person is a joint lead applicant.
           parameters:
             joint_lead_applicants: '$response.body#/id'
         lead_investigator_awards:
           operationId: getAwardCollection
-          description: Get all awards for which this person is a lead investigator
+          description: Get all awards for which this person is a lead investigator.
           parameters:
             lead_investigators: '$response.body#/id'
         chief_investigator_awards:
           operationId: getAwardCollection
-          description: Get all awards for which this person is a chief investigator
+          description: Get all awards for which this person is a chief investigator.
           parameters:
             chief_investigators: '$response.body#/id'
         co_investigator_awards:
           operationId: getAwardCollection
-          description: Get all awards for which this person is a co-investigator
+          description: Get all awards for which this person is a co-investigator.
           parameters:
             co_investigator: '$response.body#/id'
         director_awards:
           operationId: getAwardCollection
-          description: Get all awards for which this person is a director
+          description: Get all awards for which this person is a director.
           parameters:
             directors: '$response.body#/id'
     200OKPersonCollection:
-      description: A collection of people
+      description: A collection of people.
       content:
         application/json:
           schema:
@@ -930,7 +964,7 @@ components:
             items:
               '$ref': '#/components/schemas/personReference'
     200OKInstitution:
-      description: A research institution
+      description: A research institution.
       content:
         application/json:
           schema:
@@ -941,7 +975,7 @@ components:
           parameters:
             institution: '$response.body#/id'
     200OKInstitutionCollection:
-      description: A collection of research institutions
+      description: A collection of research institutions.
       content:
         application/json:
           schema:
@@ -949,13 +983,13 @@ components:
             items:
               '$ref': '#/components/schemas/institutionReference'
     200OKUser:
-      description: A IODA user
+      description: A user.
       content:
         application/json:
           schema:
             '$ref': '#/components/schemas/user'
     200OKUserCollection:
-      description: A collection of IODA users
+      description: A collection of users.
       content:
         application/json:
           schema:
@@ -1032,4 +1066,4 @@ components:
     ioda:
       type: http
       scheme: Bearer
-      description: A IODA API token generated through your IODA user account.
+      description: An API token generated through your user account.
