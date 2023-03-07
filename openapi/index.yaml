@@ -725,7 +725,7 @@ components:
       description: Open Researcher and Contributor ID.
       externalDocs:
         url: https://orcid.org/
-        title: Official ORCID site
+        description: Official ORCID site.
       type: string
       pattern: '^https:\/\/orcid.org\/\d{4}-\d{4}-\d{4}-\d{4}$'
       examples:
