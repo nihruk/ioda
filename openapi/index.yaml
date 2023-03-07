@@ -548,6 +548,8 @@ components:
           type: array
           items:
             '$ref': '#/components/schemas/personReference'
+        isrctn:
+          '$ref': '#/components/schemas/isrctn'
       required:
         - id
         - center
@@ -730,6 +732,16 @@ components:
       pattern: '^https:\/\/orcid.org\/\d{4}-\d{4}-\d{4}-\d{4}$'
       examples:
         - https://orcid.org/0000-0002-1825-0097
+    isrctn:
+      title: ISRCTN
+      description: An ISRCTN registration number.
+      externalDocs:
+        url: https://www.isrctn.com/
+        description: Official ISRCTN site.
+      type: string
+      pattern: '^ISRCTN\d{8}$'
+      examples:
+        - ISRCTN86750102
     coordinates:
       type: object
       title: Coordinates
