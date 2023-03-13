@@ -550,6 +550,8 @@ components:
             '$ref': '#/components/schemas/personReference'
         isrctn:
           '$ref': '#/components/schemas/isrctn'
+        prospero:
+          '$ref': '#/components/schemas/prospero'
       required:
         - id
         - center
@@ -742,6 +744,17 @@ components:
       pattern: '^ISRCTN\d{8}$'
       examples:
         - ISRCTN86750102
+    prospero:
+      title: PROSPERO
+      description: A PROSPERO registration number.
+      externalDocs:
+        url: https://www.crd.york.ac.uk/PROSPERO/
+        description: Official PROSPERO site.
+      type: string
+      minLength: 1
+      maxLength: 255
+      examples:
+        - CRD42021232535
     coordinates:
       type: object
       title: Coordinates
